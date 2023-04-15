@@ -1,0 +1,216 @@
+/*
+* Author: scrl0
+* Date: 20.02.2021
+* Name: learning HTML/CSS + JS + PHP
+*/
+body {
+    background: /*linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),*/ url("img/bluepaper.jpg");
+    font-family: 'Raleway', "Comic Sans MS", sans-serif;
+    color: #222222;
+    line-height: 1.5em;
+}
+a {
+    color: #f9f9f9;
+}
+h1, h2 {
+    font-family: 'Newsreader', "Times New Roman", serif;
+    margin: 0.4em 0 0.3em;
+}
+/*End of stylizing standalone elements*/
+/*Header stylization*/
+body > header {
+    background-color: /*#14145a*/#161483;
+    height: 7vh;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    font-size: 3vh;
+}
+header nav {
+    height: 100%;
+}
+header ul {
+    display: flex;
+    height: 100%;
+}
+header li {
+    flex: auto;
+}
+header li a {
+    display: block;
+    text-align: center;
+    padding: 2vh 0;
+    line-height: 1;
+}
+header li a:hover {
+    background-color: /*#191970*/#403DCA;
+}
+/*Main block stylization*/
+body > main {
+    display: flex;
+    justify-content: space-around;
+    min-height: 100vh;
+    font-size: 18px;
+}
+main h1 {
+    font-size: 36px;
+}
+/*Main content*/
+main section {
+    background-color: #f1f1f1;
+    margin: 8vh 1vw 1vh 5vw;
+    padding: 4vh 5%;
+    border-radius: 8px;
+    flex: 4 4 0;
+}
+/*Sidebar*/
+main aside {
+    background-color: #f1f1f1;
+    margin: 8vh 5vw 1vh 1vw;
+    padding: 2vh 2%;
+    border-radius: 8px;
+    flex: 1 1 0;
+    display: flex;
+    flex-flow: column wrap;
+}
+aside h2 {
+    font-size: 27px;
+}
+/*Login form*/
+.log-in {
+    padding: 1vh 1vw 3vh;
+    margin: 0 -1vw;
+    border-bottom: 1px solid #444444;
+    font-size: 14px;
+    display: none;
+}
+.log-in > h2 {
+    text-align: center;
+    text-shadow: rgba(125,125,125,0.4) 0 0 6px;
+}
+.log-in > input {
+    width: 100%;
+    height: 2em;
+    margin-bottom: 0.6em;
+}
+.log-in > span {
+    display: flex;
+    line-height: 1em;
+    margin-bottom: 1vh;
+}
+.log-in label {
+    flex: 1 1 auto;
+}
+.log-in span > span {
+    text-align: right;
+    flex: 4 4 auto;
+}
+aside a {
+    color: #222222;
+}
+aside a:hover {
+    color: /*#ad7916*/#FFA72F;
+}
+#login, #password {
+    border: 1px solid rgba(125,125,125,0.35);
+    border-left: 0.3vw solid rgba(125,125,125,0.35);
+    background-color: rgba(125, 125, 125, 0.05);
+    color: rgba(125, 125, 125, 0.4);
+    padding-left: 5px;
+    box-shadow: rgba(125,125,125,0.15) 2px 4px 5px;
+}
+.log-in > input[type="submit"], aside > form > input[type="button"] {
+    background-color: /*#18b6b6*/#24C685;
+    border: 1px solid /*darkcyan*/#0C8152;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: rgba(125,125,125,0.45) 0 0 5px;
+}
+.log-in > input[type=submit]:hover {
+    background-color: /*#148b8b*/#3A9570;
+}
+.log-in > input[type="button"]:hover {
+    background-color: /*#148b8b*/#3A9570;
+}
+/*Account Settings*/
+.manage {
+    text-align: center;
+    background-color: #fafafa;
+    margin: 0 -1vw;
+    border-bottom: 1px solid #444444;
+    border-top: 1px solid #444444;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column nowrap;
+}
+.profile {
+    width: 100%;
+    flex: 1 1 auto;
+    position: relative;
+}
+.back {
+    background: url("img/profile-back.jpg") center no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 6em;
+}
+.profile img {
+    height: 50%;
+    border-radius: 50%;
+    background-color: #ffffff;
+    position: absolute;
+    top: 40%;
+    right: 37%;
+}
+.profile::after {
+    content: ' ';
+    display: block;
+    height: 2em;
+}
+.manage p {
+    font-weight: bolder;
+    flex: 1 1 auto;
+}
+.manage ul {
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 6 6 auto;
+}
+.manage li {
+    flex: 1 1 auto;
+}
+.manage a {
+    display: block;
+    padding: 0.5em 0;
+    height: 2em;
+}
+.manage li:hover {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #999999;
+}
+/*Useful links*/
+.links {
+    border-bottom: 1px solid #444444;
+    padding: 1vh 0;
+    line-height: 1.5em;
+    font-size: 18px;
+    text-align: center;
+}
+/*VK*/
+.vk {
+    padding: 3vh 0;
+    min-height: 30vh;
+}
+/*Footer stylization*/
+body > footer {
+    background-color: /*#14145a*/#161483;
+    text-align: center;
+    padding-top: 1.5vh;
+    color: #f9f9f9;
+}
+body > footer a:hover {
+    color: /*orange*/#FFA72F;
+}

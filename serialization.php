@@ -2,9 +2,11 @@
 
 function checkSubAndChange(mixed $key, string $sub) 
 {
-    if (!($pos = strpos($key, $sub))) {
-        $key = substr($key, 0, $pos) . "\\". $sub . $key = substr($key, $pos + 1);
+    if (($pos = strpos($key, $sub))) {
+        $key = substr($key, 0, $pos) . "\\". $sub . substr($key, $pos + 1);
     }
+
+    return $key;
 }
 
 function recSerial(mixed $elem)
@@ -13,81 +15,44 @@ function recSerial(mixed $elem)
 
     if (is_array($elem)) {
         $finalStr .= "[";
-        foreach ($elem as $key => $value) {
-            //If value is array do recursive
-            if (is_array($value)) recSerial($value);
-            /*Maybe external function?*/
-            // if (!($pos = strpos($key, "["))) {
-            //     $key = substr($key, 0, $pos) . "\[" . $key = substr($key, $pos + 1);
-            // }
-            // if (!($pos = strpos($key, '\\'))) {
-            //     $key = substr($key, 0, $pos) . "\\\\" . $key = substr($key, $pos + 1);
-            // }
-            // if (!($pos = strpos($key, "]"))) {
-            //     $key = substr($key, 0, $pos) . "\]" . $key = substr($key, $pos + 1);
-            // }
-            // if (!($pos = strpos($key, ":"))) {
-            //     $key = substr($key, 0, $pos) . "\:" . $key = substr($key, $pos + 1);
-            // }
-            // if (!($pos = strpos($key, ";"))) {
-            //     $key = substr($key, 0, $pos) . "\;" . $key = substr($key, $pos + 1);
-            // }
-            // if (!($pos = strpos($value, "["))) {
-            //     $value = substr($value, 0, $pos) . "\[" . $value = substr($value, $pos + 1);
-            // }
-            // if (!($pos = strpos($value, '\\'))) {
-            //     $value = substr($value, 0, $pos) . "\\\\" . $value = substr($value, $pos + 1);
-            // }
-            // if (!($pos = strpos($value, "]"))) {
-            //     $value = substr($value, 0, $pos) . "\]" . $value = substr($value, $pos + 1);
-            // }
-            // if (!($pos = strpos($value, ":"))) {
-            //     $value = substr($value, 0, $pos) . "\:" . $value = substr($value, $pos + 1);
-            // }
-            // if (!($pos = strpos($value, ";"))) {
-            //     $value = substr($value, 0, $pos) . "\;" . $value = substr($value, $pos + 1);
-            // }
-            /*-----------------------*/
-                checkSubAndChange($key, "[");
-                checkSubAndChange($key, "\\");
-                checkSubAndChange($key, "]");
-                checkSubAndChange($key, ":");
-                checkSubAndChange($key, ";");
 
-                checkSubAndChange($value, "[");
-                checkSubAndChange($value, "\\");
-                checkSubAndChange($value, "]");
-                checkSubAndChange($value, ":");
-                checkSubAndChange($value, ";");
-            /**/
-            $finalStr .= "{$key}:{$value};";
+        foreach ($elem as $key => $value) {
+            $delim = ";";
+
+            if (is_array($value)) {
+                $value = recSerial($value);
+                $delim = "";
+            } else {
+                $key = checkSubAndChange($key, "[");
+                $key = checkSubAndChange($key, "\\");
+                $key = checkSubAndChange($key, "]");
+                $key = checkSubAndChange($key, ":");
+                $key = checkSubAndChange($key, ";");
+
+                $value = checkSubAndChange($value, "[");
+                $value = checkSubAndChange($value, "\\");
+                $value = checkSubAndChange($value, "]");
+                $value = checkSubAndChange($value, ":");
+                $value = checkSubAndChange($value, ";");
+            }
+
+            $finalStr .= $key . ":" . $value . $delim;
         }
+
         $finalStr .= "];";
     } else {
-        // if (!($pos = strpos($elem, "["))) {
-        //     $elem = substr($elem, 0, $pos) . "\[" . $elem = substr($elem, $pos + 1);
-        // }
-        // if (!($pos = strpos($elem, '\\'))) {
-        //     $elem = substr($elem, 0, $pos) . "\\\\" . $elem = substr($elem, $pos + 1);
-        // }
-        // if (!($pos = strpos($elem, "]"))) {
-        //     $elem = substr($elem, 0, $pos) . "\]" . $elem = substr($elem, $pos + 1);
-        // }
-        // if (!($pos = strpos($elem, ":"))) {
-        //     $elem = substr($elem, 0, $pos) . "\:" . $elem = substr($elem, $pos + 1);
-        // }
-        // if (!($pos = strpos($elem, ";"))) {
-        //     $elem = substr($elem, 0, $pos) . "\;" . $elem = substr($elem, $pos + 1);
-        // }
         checkSubAndChange($elem, "[");
         checkSubAndChange($elem, "\\");
         checkSubAndChange($elem, "]");
         checkSubAndChange($elem, ":");
         checkSubAndChange($elem, ";");
+        
         $finalStr .= $elem . ";";
     }
 
     return $finalStr;
 }
+
+echo recSerial($GLOBALS);
 
 ?>

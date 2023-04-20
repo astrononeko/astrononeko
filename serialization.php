@@ -1,13 +1,13 @@
 <?php
 
-public function checkSubAndChange(mixed $key, string $sub) 
+function checkSubAndChange(mixed $key, string $sub) 
 {
     if (!($pos = strpos($key, $sub))) {
         $key = substr($key, 0, $pos) . "\\". $sub . $key = substr($key, $pos + 1);
     }
 }
 
-public function recSerial(mixed $elem)
+function recSerial(mixed $elem)
 {
     $finalStr = "";
 
@@ -60,7 +60,7 @@ public function recSerial(mixed $elem)
                 checkSubAndChange($value, ":");
                 checkSubAndChange($value, ";");
             /**/
-            $finalStr .= "{$key}:{$value};"
+            $finalStr .= "{$key}:{$value};";
         }
         $finalStr .= "];";
     } else {
@@ -84,7 +84,7 @@ public function recSerial(mixed $elem)
         checkSubAndChange($elem, "]");
         checkSubAndChange($elem, ":");
         checkSubAndChange($elem, ";");
-        $finalStr .= $elem . ";"
+        $finalStr .= $elem . ";";
     }
 
     return $finalStr;

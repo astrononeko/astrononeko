@@ -1,5 +1,7 @@
 <?php
 
+define ('SPEC_CHARS', ["[", "\\", "]", ":", ";"]);
+
 function checkSubAndChange(mixed $key, string $sub) 
 {
     if (($pos = strpos($key, $sub))) {
@@ -23,17 +25,14 @@ function recSerial(mixed $elem)
                 $value = recSerial($value);
                 $delim = "";
             } else {
-                $key = checkSubAndChange($key, "[");
-                $key = checkSubAndChange($key, "\\");
-                $key = checkSubAndChange($key, "]");
-                $key = checkSubAndChange($key, ":");
-                $key = checkSubAndChange($key, ";");
 
-                $value = checkSubAndChange($value, "[");
-                $value = checkSubAndChange($value, "\\");
-                $value = checkSubAndChange($value, "]");
-                $value = checkSubAndChange($value, ":");
-                $value = checkSubAndChange($value, ";");
+                foreach (SPEC_CHARS as $v) {
+                    $key = checkSubAndChange($key, $v);
+                }
+                foreach (SPEC_CHARS as $v) {
+                    $value = checkSubAndChange($value, $v);
+                }
+
             }
 
             $finalStr .= $key . ":" . $value . $delim;
@@ -41,12 +40,11 @@ function recSerial(mixed $elem)
 
         $finalStr .= "];";
     } else {
-        checkSubAndChange($elem, "[");
-        checkSubAndChange($elem, "\\");
-        checkSubAndChange($elem, "]");
-        checkSubAndChange($elem, ":");
-        checkSubAndChange($elem, ";");
-        
+
+        foreach (SPEC_CHARS as $v) {
+            $elem = checkSubAndChange($elem, $v);
+        }
+
         $finalStr .= $elem . ";";
     }
 
